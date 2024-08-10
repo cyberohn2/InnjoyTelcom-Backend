@@ -29,12 +29,12 @@ const reviewSchema = new mongoose.Schema({
   content: String,
 });
 
-const Review = mongoose.model('Review', reviewSchema);
+const ReviewApp = mongoose.model('ReviewApp', reviewSchema);
 
 // Routes
 app.get('/reviews', async (req, res) => {
   try {
-    const reviews = await Review.find();
+    const reviews = await ReviewApp.find();
     res.json(reviews);
   } catch (error) {
     res.status(500).json({ error: 'Server error' });
@@ -42,7 +42,7 @@ app.get('/reviews', async (req, res) => {
 });
 
 app.post('/reviews', async (req, res) => {
-  const newReview = new Review(req.body);
+  const newReview = new ReviewApp(req.body);
   try {
     const savedReview = await newReview.save();
     res.json(savedReview);

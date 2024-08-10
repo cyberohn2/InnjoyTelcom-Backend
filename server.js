@@ -14,14 +14,13 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Database connection
-mongoose.connect(process.env.MONGO_URI, {
-  useUnifiedTopology: true,
-}).then(() => {
-  console.log('Connected to MongoDB');
-}).catch((error) => {
-  console.error('Error connecting to MongoDB:', error.message);
-});
-
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch((error) => {
+    console.error('Error connecting to MongoDB:', error.message);
+  });
 
 // Review schema and model
 const reviewSchema = new mongoose.Schema({

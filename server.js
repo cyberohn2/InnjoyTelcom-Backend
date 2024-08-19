@@ -51,6 +51,25 @@ app.post('/reviews', async (req, res) => {
   }
 });
 
+// Delete a review by title
+app.delete('/reviews', async (req, res) => {
+  const { title } = req.body;
+  
+  try {
+    const deletedReview = await ReviewApp.findOneAndDelete({ title });
+    
+    if (!deletedReview) {
+      return res.status(404).json({ error: 'Review not found' });
+    }
+    
+    res.json({ message: 'Review deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
